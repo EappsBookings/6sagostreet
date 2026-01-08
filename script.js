@@ -19,3 +19,34 @@ themeToggleBtn.addEventListener('click', function() {
         localStorage.theme = 'dark';
     }
 });
+
+// Language Detection and Toggle Logic
+function detectAndApplyLanguage() {
+    // Get browser language (e.g., "en-US", "zh-CN", "zh-SG")
+    const userLang = navigator.language || navigator.userLanguage;
+    const isChinese = userLang.toLowerCase().startsWith('zh');
+
+    if (isChinese) {
+        // Hide English elements
+        document.querySelectorAll('.lang-en').forEach(el => {
+            el.classList.add('hidden');
+        });
+        // Show Chinese elements
+        document.querySelectorAll('.lang-zh').forEach(el => {
+            el.classList.remove('hidden');
+        });
+        
+        // Update document title if needed (Simple replacement)
+        if (document.title.includes('FOR LEASE')) {
+            document.title = "硕莪街 6 & 8 号 | 出租 | 牛车水保留店屋";
+            // Update meta description
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) {
+                metaDesc.setAttribute("content", "新加坡硕莪街 6 & 8 号优质商业店屋出租。牛车水核心地段罕见的双连单位机会。");
+            }
+        }
+    }
+}
+
+// Run language detection on load
+document.addEventListener('DOMContentLoaded', detectAndApplyLanguage);
