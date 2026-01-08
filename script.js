@@ -48,5 +48,36 @@ function detectAndApplyLanguage() {
     }
 }
 
-// Run language detection on load
-document.addEventListener('DOMContentLoaded', detectAndApplyLanguage);
+// WeChat Copy Logic
+function setupCopyButtons() {
+    const copyBtns = document.querySelectorAll('.wechat-copy-btn');
+    const toast = document.getElementById('copy-toast');
+    let toastTimeout;
+
+    copyBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const idToCopy = btn.getAttribute('data-id');
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(idToCopy).then(() => {
+                // Show Toast
+                toast.classList.remove('opacity-0', 'translate-y-4');
+                
+                // Hide after 3 seconds
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-4');
+                }, 3000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy ID. Please copy manually: ' + idToCopy);
+            });
+        });
+    });
+}
+
+// Run on load
+document.addEventListener('DOMContentLoaded', () => {
+    detectAndApplyLanguage();
+    setupCopyButtons();
+});
