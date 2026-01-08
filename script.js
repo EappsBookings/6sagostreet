@@ -54,8 +54,32 @@ function setupCopyButtons() {
     });
 }
 
+// Mobile Menu Logic
+function setupMobileMenu() {
+    const btn = document.querySelector('[aria-controls="mobile-menu"]');
+    const menu = document.getElementById('mobile-menu');
+
+    if (btn && menu) {
+        btn.addEventListener('click', () => {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', !isExpanded);
+            menu.classList.toggle('hidden');
+        });
+
+        // Close menu when a link is clicked
+        const links = menu.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+}
+
 // Run on load
 document.addEventListener('DOMContentLoaded', () => {
     detectAndApplyLanguage();
     setupCopyButtons();
+    setupMobileMenu();
 });
