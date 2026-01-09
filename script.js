@@ -13,7 +13,7 @@ function detectAndApplyLanguage() {
         document.querySelectorAll('.lang-zh').forEach(el => {
             el.classList.remove('hidden');
         });
-        
+
         // Update document title if needed (Simple replacement)
         if (document.title.includes('FOR LEASE')) {
             document.title = "硕莪街 6 & 8 号 | 出租 | 牛车水保留店屋";
@@ -35,12 +35,12 @@ function setupCopyButtons() {
     copyBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const idToCopy = btn.getAttribute('data-id');
-            
+
             // Copy to clipboard
             navigator.clipboard.writeText(idToCopy).then(() => {
                 // Show Toast
                 toast.classList.remove('opacity-0', 'translate-y-4');
-                
+
                 // Hide after 3 seconds
                 clearTimeout(toastTimeout);
                 toastTimeout = setTimeout(() => {
@@ -86,6 +86,7 @@ const galleryMedia = [
     { type: 'image', src: 'assets/sagostreet4.jpeg', captionEn: 'Spacious Layout', captionZh: '周边街景' },
     { type: 'image', src: 'assets/sagostreet5.jpeg', captionEn: 'Architectural Features', captionZh: '屋顶 / 景观' },
     { type: 'image', src: 'assets/sagostreet6.jpeg', captionEn: 'Interior View', captionZh: '内景' },
+    { type: 'image', src: 'assets/sagostreet7.jpeg', captionEn: 'Interior View', captionZh: '内景' },
     { type: 'image', src: 'assets/sagostreet8.jpeg', captionEn: 'Interior Details', captionZh: '内景详情' }
 ];
 
@@ -99,7 +100,7 @@ function setupLightbox() {
 
     // Close on button click
     closeBtn.addEventListener('click', closeLightbox);
-    
+
     // Close on background click (optional)
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
@@ -125,7 +126,7 @@ function openLightbox(index) {
     lightbox.classList.remove('hidden');
     // Small delay to allow display:block to apply before opacity transition
     setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
-    
+
     updateLightboxContent();
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
 }
@@ -169,7 +170,7 @@ function updateLightboxContent() {
         container.appendChild(video);
     } else {
         const picture = document.createElement('picture');
-        
+
         // AVIF Source
         const sourceAvif = document.createElement('source');
         sourceAvif.srcset = item.src.replace('.jpeg', '.avif');
