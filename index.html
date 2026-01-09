@@ -126,8 +126,11 @@
     <!-- Hero Section -->
     <div class="relative bg-gray-900 h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0">
-            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcR91C3p8ahve_8Ry7u3r8lPXC9VeOduTH8TMDLnVJQGZnc7hwA6Wl6ZIRPiWvkOJHKFLuvAvYsvbTsjZNeOeptML5Y&s=19"
-                alt="6 & 8 Sago Street" class="w-full h-full object-cover opacity-70">
+            <picture>
+                <source srcset="assets/sagostreet7.avif" type="image/avif">
+                <source srcset="assets/sagostreet7.webp" type="image/webp">
+                <img src="assets/sagostreet7.jpeg" alt="6 & 8 Sago Street" class="w-full h-full object-cover opacity-70">
+            </picture>
             <div class="absolute inset-0 bg-gradient-to-b from-gray-900/60 via-transparent to-gray-900"></div>
         </div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -565,6 +568,14 @@
                         </picture>
                     </div>
 
+                    <div class="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer" onclick="openLightbox(7)">
+                        <picture>
+                            <source srcset="assets/sagostreet8.avif" type="image/avif">
+                            <source srcset="assets/sagostreet8.webp" type="image/webp">
+                            <img src="assets/sagostreet8.jpeg" alt="Interior Details" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 pointer-events-none">
+                        </picture>
+                    </div>
+
                 </div>
 
                 
@@ -580,9 +591,8 @@
                 <span class="lang-zh hidden">对硕莪街 6 & 8 号感兴趣？</span>
             </h2>
             <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                <span class="lang-en">Secure your piece of Singapore's heritage today. Contact our listing agents for a
-                    private viewing.</span>
-                <span class="lang-zh hidden">立即锁定这份新加坡的珍贵遗产。请联系我们的房产经纪人安排私人看房。</span>
+                <span class="lang-en">Owner-direct listing — contact owner directly for a private viewing.</span>
+                <span class="lang-zh hidden">业主直租 — 请直接联系业主安排私人看房。</span>
             </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">

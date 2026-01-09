@@ -85,7 +85,8 @@ const galleryMedia = [
     { type: 'image', src: 'assets/sagostreet3.jpeg', captionEn: 'Interior Details', captionZh: '二楼内景' },
     { type: 'image', src: 'assets/sagostreet4.jpeg', captionEn: 'Spacious Layout', captionZh: '周边街景' },
     { type: 'image', src: 'assets/sagostreet5.jpeg', captionEn: 'Architectural Features', captionZh: '屋顶 / 景观' },
-    { type: 'image', src: 'assets/sagostreet6.jpeg', captionEn: 'Interior View', captionZh: '内景' }
+    { type: 'image', src: 'assets/sagostreet6.jpeg', captionEn: 'Interior View', captionZh: '内景' },
+    { type: 'image', src: 'assets/sagostreet8.jpeg', captionEn: 'Interior Details', captionZh: '内景详情' }
 ];
 
 let currentSlideIndex = 0;
