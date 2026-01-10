@@ -13,7 +13,7 @@ function detectAndApplyLanguage() {
         document.querySelectorAll('.lang-zh').forEach(el => {
             el.classList.remove('hidden');
         });
-
+        
         // Update document title if needed (Simple replacement)
         if (document.title.includes('FOR LEASE')) {
             document.title = "硕莪街 6 & 8 号 | 出租 | 牛车水保留店屋";
@@ -35,12 +35,12 @@ function setupCopyButtons() {
     copyBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const idToCopy = btn.getAttribute('data-id');
-
+            
             // Copy to clipboard
             navigator.clipboard.writeText(idToCopy).then(() => {
                 // Show Toast
                 toast.classList.remove('opacity-0', 'translate-y-4');
-
+                
                 // Hide after 3 seconds
                 clearTimeout(toastTimeout);
                 toastTimeout = setTimeout(() => {
@@ -91,6 +91,7 @@ const galleryMedia = [
 ];
 
 let currentSlideIndex = 0;
+let activeMediaSet = galleryMedia;
 
 function setupLightbox() {
     const lightbox = document.getElementById('lightbox');
@@ -98,37 +99,53 @@ function setupLightbox() {
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
 
-    // Close on button click
     closeBtn.addEventListener('click', closeLightbox);
-
-    // Close on background click (optional)
+    
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
     });
 
-    // Nav buttons
-    prevBtn.addEventListener('click', () => changeSlide(-1));
-    nextBtn.addEventListener('click', () => changeSlide(1));
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); changeSlide(-1); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); changeSlide(1); });
 
-    // Keyboard support
     document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('hidden')) {
             if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            if (e.key === 'ArrowRight') changeSlide(1);
+            if (activeMediaSet.length > 1) {
+                if (e.key === 'ArrowLeft') changeSlide(-1);
+                if (e.key === 'ArrowRight') changeSlide(1);
+            }
         }
     });
 }
 
-function openLightbox(index) {
+/**
+ * Opens the lightbox.
+ * @param {number} index - Starting index
+ * @param {Array} [mediaSet] - Optional custom set of media
+ */
+function openLightbox(index, mediaSet = galleryMedia) {
+    activeMediaSet = mediaSet;
     currentSlideIndex = index;
+    
     const lightbox = document.getElementById('lightbox');
-    lightbox.classList.remove('hidden');
-    // Small delay to allow display:block to apply before opacity transition
-    setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
 
+    // Show/Hide arrows based on set size
+    if (activeMediaSet.length <= 1) {
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+    } else {
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+    }
+
+    lightbox.classList.remove('hidden');
+    setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
+    
     updateLightboxContent();
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
@@ -136,29 +153,26 @@ function closeLightbox() {
     lightbox.classList.add('opacity-0');
     setTimeout(() => {
         lightbox.classList.add('hidden');
-        document.getElementById('lightbox-content').innerHTML = ''; // Clear content to stop video
+        document.getElementById('lightbox-content').innerHTML = '';
     }, 300);
     document.body.style.overflow = '';
 }
 
 function changeSlide(direction) {
     currentSlideIndex += direction;
-    if (currentSlideIndex < 0) currentSlideIndex = galleryMedia.length - 1;
-    if (currentSlideIndex >= galleryMedia.length) currentSlideIndex = 0;
+    if (currentSlideIndex < 0) currentSlideIndex = activeMediaSet.length - 1;
+    if (currentSlideIndex >= activeMediaSet.length) currentSlideIndex = 0;
     updateLightboxContent();
 }
 
 function updateLightboxContent() {
     const container = document.getElementById('lightbox-content');
     const captionEl = document.getElementById('lightbox-caption');
-    const item = galleryMedia[currentSlideIndex];
+    const item = activeMediaSet[currentSlideIndex];
     const isChinese = (navigator.language || navigator.userLanguage).toLowerCase().startsWith('zh');
 
-    // Update Caption
     captionEl.textContent = isChinese ? item.captionZh : item.captionEn;
-
-    // Update Content
-    container.innerHTML = ''; // Clear previous
+    container.innerHTML = '';
 
     if (item.type === 'video') {
         const video = document.createElement('video');
@@ -170,20 +184,17 @@ function updateLightboxContent() {
         container.appendChild(video);
     } else {
         const picture = document.createElement('picture');
-
-        // AVIF Source
+        
         const sourceAvif = document.createElement('source');
         sourceAvif.srcset = item.src.replace('.jpeg', '.avif');
         sourceAvif.type = 'image/avif';
         picture.appendChild(sourceAvif);
 
-        // WebP Source
         const sourceWebp = document.createElement('source');
         sourceWebp.srcset = item.src.replace('.jpeg', '.webp');
         sourceWebp.type = 'image/webp';
         picture.appendChild(sourceWebp);
 
-        // Fallback Image
         const img = document.createElement('img');
         img.src = item.src;
         img.className = 'max-w-full max-h-[80vh] rounded shadow-lg object-contain';

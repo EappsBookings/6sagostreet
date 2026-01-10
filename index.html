@@ -504,6 +504,61 @@
                     </dl>
                 </div>
             </div>
+
+            <!-- Layout Options -->
+            <div class="mt-16 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg border border-gray-200 dark:border-gray-700">
+                <div class="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
+                        <span class="lang-en">Layout Options</span>
+                        <span class="lang-zh hidden">布局方案</span>
+                    </h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
+                        <span class="lang-en">Flexible configurations to suit your business needs.</span>
+                        <span class="lang-zh hidden">灵活的配置以满足您的业务需求。</span>
+                    </p>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-6">
+                            <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                                <h4 class="text-md font-bold text-heritage-red mb-2">Option A</h4>
+                                <p class="text-gray-900 dark:text-white font-medium mb-1">
+                                    <span class="lang-en">Retail & Light Food</span>
+                                    <span class="lang-zh hidden">零售及轻食</span>
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                    <span class="lang-en">Optimized for retail display and light food preparation. Maximum frontage usage.</span>
+                                    <span class="lang-zh hidden">优化零售展示和轻食准备空间。最大化门面利用率。</span>
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                                <h4 class="text-md font-bold text-heritage-red mb-2">Option B</h4>
+                                <p class="text-gray-900 dark:text-white font-medium mb-1">
+                                    <span class="lang-en">Full F&B (Big Kitchen)</span>
+                                    <span class="lang-zh hidden">全餐饮（大厨房）</span>
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                    <span class="lang-en">Features a comprehensive kitchen layout suitable for full-scale restaurant operations.</span>
+                                    <span class="lang-zh hidden">配备适合全面餐厅运营的综合厨房布局。</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="relative rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 group cursor-pointer" onclick="openLightbox(0, [{type: 'image', src: 'assets/floorplan_options.jpeg', captionEn: 'Floor Plan Options A & B', captionZh: '平面图方案 A & B'}])">
+                            <picture>
+                                <source srcset="assets/floorplan_options.avif" type="image/avif">
+                                <source srcset="assets/floorplan_options.webp" type="image/webp">
+                                <img src="assets/floorplan_options.jpeg" alt="Floor Plan Options A & B" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            </picture>
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                <span class="bg-heritage-red text-white px-4 py-2 rounded-md text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                                    <span class="lang-en">Enlarge Floor Plan</span>
+                                    <span class="lang-zh hidden">放大平面图</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- Gallery Section -->
@@ -614,22 +669,13 @@
                             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 pointer-events-none">
                     </picture>
                 </div>
-                <div class="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer"
-                    onclick="openLightbox(7)">
-                    <picture>
-                        <source srcset="assets/sagostreet7.avif" type="image/avif">
-                        <source srcset="assets/sagostreet7.webp" type="image/webp">
-                        <img src="assets/sagostreet7.jpeg" alt="Interior Details"
-                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 pointer-events-none">
-                    </picture>
-                </div>
 
                 <div class="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer"
                     onclick="openLightbox(8)">
                     <picture>
                         <source srcset="assets/sagostreet8.avif" type="image/avif">
                         <source srcset="assets/sagostreet8.webp" type="image/webp">
-                        <img src="assets/sagostreet8.jpeg" alt="Interior Details"
+                        <img src="assets/sagostreet8.jpeg" alt="Exterior Details"
                             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 pointer-events-none">
                     </picture>
                 </div>
