@@ -185,13 +185,16 @@ function updateLightboxContent() {
     } else {
         const picture = document.createElement('picture');
         
+        // Remove extension to swap with avif/webp
+        const baseSrc = item.src.substring(0, item.src.lastIndexOf('.'));
+
         const sourceAvif = document.createElement('source');
-        sourceAvif.srcset = item.src.replace('.jpeg', '.avif');
+        sourceAvif.srcset = baseSrc + '.avif';
         sourceAvif.type = 'image/avif';
         picture.appendChild(sourceAvif);
 
         const sourceWebp = document.createElement('source');
-        sourceWebp.srcset = item.src.replace('.jpeg', '.webp');
+        sourceWebp.srcset = baseSrc + '.webp';
         sourceWebp.type = 'image/webp';
         picture.appendChild(sourceWebp);
 
