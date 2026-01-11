@@ -183,27 +183,34 @@ function updateLightboxContent() {
         video.className = 'max-w-full max-h-[80vh] rounded shadow-lg object-contain';
         container.appendChild(video);
     } else {
-        const picture = document.createElement('picture');
-        
-        // Remove extension to swap with avif/webp
-        const baseSrc = item.src.substring(0, item.src.lastIndexOf('.'));
+        if (item.skipSources) {
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.className = 'max-w-full max-h-[80vh] rounded shadow-lg object-contain';
+            container.appendChild(img);
+        } else {
+            const picture = document.createElement('picture');
+            
+            // Remove extension to swap with avif/webp
+            const baseSrc = item.src.substring(0, item.src.lastIndexOf('.'));
 
-        const sourceAvif = document.createElement('source');
-        sourceAvif.srcset = baseSrc + '.avif';
-        sourceAvif.type = 'image/avif';
-        picture.appendChild(sourceAvif);
+            const sourceAvif = document.createElement('source');
+            sourceAvif.srcset = baseSrc + '.avif';
+            sourceAvif.type = 'image/avif';
+            picture.appendChild(sourceAvif);
 
-        const sourceWebp = document.createElement('source');
-        sourceWebp.srcset = baseSrc + '.webp';
-        sourceWebp.type = 'image/webp';
-        picture.appendChild(sourceWebp);
+            const sourceWebp = document.createElement('source');
+            sourceWebp.srcset = baseSrc + '.webp';
+            sourceWebp.type = 'image/webp';
+            picture.appendChild(sourceWebp);
 
-        const img = document.createElement('img');
-        img.src = item.src;
-        img.className = 'max-w-full max-h-[80vh] rounded shadow-lg object-contain';
-        picture.appendChild(img);
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.className = 'max-w-full max-h-[80vh] rounded shadow-lg object-contain';
+            picture.appendChild(img);
 
-        container.appendChild(picture);
+            container.appendChild(picture);
+        }
     }
 }
 
